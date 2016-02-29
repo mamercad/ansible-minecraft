@@ -1,0 +1,28 @@
+---
+# tasks file for ansible-minecraft
+
+- name: selinux permissive
+  selinux: policy=targeted state=permissive
+
+- name: firewalld stopped
+  service: name=firewalld state=stopped enabled=no
+
+- name: install prerequisites
+  yum: name={{ item }} state=present
+  with_items:
+    - java-1.8.0-openjdk
+    - screen
+
+- name: create minecraft user
+  user: name=minecraft state=present
+
+- name: fetch minecraft jar
+  get_url: >
+    url=https://s3.amazonaws.com/Minecraft.Download/versions/1.8.9/minecraft_server.1.8.9.jar
+    dest=/home/minecraft owner=minecraft group=minecraft mode=0755
+
+- name: deploy eula.txt
+  copy: src=eula.txt dest=/home/minecraft owner=root group=root mode=0644
+
+- name: deploy startcraft
+  copy: src=startcraft dest=/home/minecraft owner=root group=root mode=0755

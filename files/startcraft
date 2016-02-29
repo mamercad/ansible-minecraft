@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+screen -d -m sh -c "/usr/bin/java -Xmx768M -Xms768M -jar /home/minecraft/minecraft_server.1.8.9.jar nogui"
