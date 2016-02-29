@@ -6,7 +6,7 @@ Stands up a Minecraft server on RHEL/CentOS
 Warnings
 --------
 
-The role puts SELinux into permissive mode and disabled firewalld
+The role puts SELinux into permissive mode and disables firewalld
 
 Requirements
 ------------
