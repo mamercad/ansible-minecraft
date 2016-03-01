@@ -1,0 +1,14 @@
+[Unit]
+Description=Minecraft
+After=network.target
+
+[Service]
+Type=forking
+User=minecraft
+WorkingDirectory=/home/minecraft
+ExecStart=/usr/bin/java -Xmx768M -Xms768M -jar /home/minecraft/minecraft_server.jar nogui
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
