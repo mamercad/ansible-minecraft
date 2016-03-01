@@ -18,7 +18,7 @@
 
 - name: fetch minecraft jar
   get_url: >
-    url=https://s3.amazonaws.com/Minecraft.Download/versions/1.8.9/minecraft_server.1.8.9.jar
+    url=https://s3.amazonaws.com/Minecraft.Download/versions/1.9/minecraft_server.1.9.jar
     dest=/home/minecraft owner=minecraft group=minecraft mode=0755
 
 - name: deploy eula.txt
