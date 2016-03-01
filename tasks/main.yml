@@ -21,8 +21,17 @@
     url=https://s3.amazonaws.com/Minecraft.Download/versions/1.9/minecraft_server.1.9.jar
     dest=/home/minecraft owner=minecraft group=minecraft mode=0755
 
-- name: deploy eula.txt
-  copy: src=eula.txt dest=/home/minecraft owner=root group=root mode=0644
+- name: symlink minecraft jar
+  file: src=/home/minecraft/minecraft_server.1.9.jar dest=/home/minecraft/minecraft_server.jar state=link
 
-- name: deploy startcraft
-  copy: src=startcraft dest=/home/minecraft owner=root group=root mode=0755
+- name: deploy eula.txt
+  copy: src=eula.txt dest=/home/minecraft owner=minecraft group=minecraft mode=0644
+
+- name: deploy minecraft service
+  copy: src=minecraft.service dest=/etc/systemd/system/minecraft.service owner=root group=root mode=0644
+
+- name: deploy minecraft server.properties (hard, survival, change port)
+  copy: src=server.properties dest=/home/minecraft/server.properties owner=minecraft group=minecraft mode=0644
+
+- name: start minecraft (no graceful kill yet, who knows what will happen)
+  service: name=minecraft state=started enabled=yes
